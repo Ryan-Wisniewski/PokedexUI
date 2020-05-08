@@ -76,15 +76,15 @@ const PokemonSingle = (props) => {
                 if (each2.version.name === 'red'){
                     locationArr.push(each.location_area.name)
                     }
-                    return locationArr //was yellow erroring about no return but still worked
+                    // return locationArr //was yellow erroring about no return but adding cause side-effect
                 })
-                return locationArr   
+                // return locationArr   
             })}
 
         
-        <Location classname={'location'} pokemon={locationArr} />
-        <Moves classname={'moves'} pokemon={singlePokemon}/>
-        <Evolution classname={'evolution'} canEvolve={canEvolve} evolution={speciesPokemon}/>
+        <Location classname='location' pokemon={locationArr} />
+        <Moves classname='moves' pokemon={singlePokemon}/>
+        <Evolution classname='evolution' canEvolve={canEvolve} evolution={speciesPokemon}/>
 
         {/* Evolution's */}
 

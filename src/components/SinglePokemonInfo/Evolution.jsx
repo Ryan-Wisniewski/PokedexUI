@@ -2,7 +2,7 @@
 import React from 'react'
 
 const Evolution = ({ canEvolve, evolution }) => {
-    console.log(evolution)
+    // console.log(evolution)
     return(
         <>
 

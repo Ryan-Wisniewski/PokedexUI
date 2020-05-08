@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
+import SearchHistory from './SearchHistory';
 
 const Searchbar = () => {
     let history = useHistory();
@@ -8,6 +9,7 @@ const Searchbar = () => {
     const [newSearch, setSearch] = useState({
         pokeSearch: ''
     })
+    const [newHistory, setNewHistory] = useState()
     const handleChange = (e) => {
         setSearch({
             ...newSearch,
@@ -21,9 +23,11 @@ const Searchbar = () => {
         //check if num was typed > 151 && 
         //FUTURE: create dict from their names and check names against the dict.
         //Then dont need this duplicate ajax req
+        
         axios.get(`https://pokeapi.co/api/v2/pokemon/${data}`)
             .then(res => {
                 console.log(res)
+                setNewHistory(data)
                 history.push(`/${res.data.id}`)
                 window.location.reload()
             })
@@ -34,6 +38,7 @@ const Searchbar = () => {
     }
 
     return (
+        <div>
         <form onSubmit={onsubmit}>
             <input 
                 type='text'
@@ -41,8 +46,10 @@ const Searchbar = () => {
                 value={newSearch.pokeSearch}
                 onChange={handleChange}
             />
-            <button >Search</button>
+            <button>Search</button>
         </form>
+        <SearchHistory newSearch={newHistory} />
+        </div>
     )
 }
 

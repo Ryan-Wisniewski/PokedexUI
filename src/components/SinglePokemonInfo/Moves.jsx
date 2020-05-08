@@ -8,12 +8,14 @@ const Moves = ({ pokemon }) => {
     while(pokemon){
         let r = Math.floor(Math.random() * pokemon.moves.length)
         
-            if(moveList.length == 4){
+            if(moveList.length === 4){
                 break
-            } else if (pokemon.moves[r].move.name in moveList){
+            } else if (moveList.includes(pokemon.moves[r].move.name)){
+                console.log('change random to avoid this logs occurrence')
                 //pass
+            } else {
+                moveList.push(pokemon.moves[r].move.name)
             }
-            moveList.push(pokemon.moves[r].move.name)
     }
     
     return(
@@ -24,7 +26,7 @@ const Moves = ({ pokemon }) => {
             </div>
             {/* create link to page with all moves */}
             <div>
-                {moveList.length == 4 && moveList.map((each) => <p>{each}</p>)}
+                {moveList.length === 4 && moveList.map((each) => <p>{each}</p>)}
             </div>
         </>
     )
