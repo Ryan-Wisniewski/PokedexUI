@@ -5,7 +5,6 @@ import SearchHistory from './SearchHistory';
 
 const Searchbar = () => {
     let history = useHistory();
-    // console.log(props, history)
     const [newSearch, setSearch] = useState({
         pokeSearch: ''
     })
@@ -26,7 +25,6 @@ const Searchbar = () => {
         
         axios.get(`https://pokeapi.co/api/v2/pokemon/${data}`)
             .then(res => {
-                console.log(res)
                 setNewHistory(data)
                 history.push(`/${res.data.id}`)
                 window.location.reload()

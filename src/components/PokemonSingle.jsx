@@ -37,7 +37,6 @@ const PokemonSingle = (props) => {
                 let evolutionId = res.data.evolution_chain.url
                 axios.get(`${evolutionId}`)
                     .then(res => {
-                        // console.log(res.data)
                         if (res.data.chain.evolves_to.length > 0){
                             setCanEvolve(true)
                             setEvolutionInfo(res.data.chain)
@@ -57,7 +56,6 @@ const PokemonSingle = (props) => {
 
     return (
         <div className='pokemonSingle'>
-        {/* {console.log(singlePokemon, 'LOCATION\n', locationPokemon, '\nSPECIES', speciesPokemon)} */}
         {/* General */}
         <Link className='backButton' to='/'>Back</Link>
         <div className='general'>
