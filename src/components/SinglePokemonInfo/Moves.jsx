@@ -2,7 +2,6 @@
 import React from 'react'
 
 const Moves = ({ pokemon }) => {
-    // console.log(pokemon)
     let moveList = []
 
     while(pokemon){
@@ -20,7 +19,6 @@ const Moves = ({ pokemon }) => {
     
     return(
         <div className='moves'>
-            {/* {console.log(moveList)} */}
             <div className='abilityList'>
                 <h2>Abilites:</h2>
                 {pokemon && pokemon.abilities.map((each) => <p>{each.ability.name}</p>)}

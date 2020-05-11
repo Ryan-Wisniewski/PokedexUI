@@ -13,35 +13,30 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
     //plan CHECK for name in first, if name does not match move to the next evolves_to
     if (canEvolve === true) {
         if (evolution &&  pokemon){
-            // console.log(evolution, pokemon)
             //For Evolution
             if(pokemon.name === evolution.species.name){
                 //base pokemon
-                // console.log(evolution.evolves_to[0].evolves_to.length)
                 if(evolution.evolves_to[0].evolves_to.length === 0){
-                    //2 evolution
-                    console.log('First of two EVOLUTION')
+                    //First of two EVOLUTION
                     evolveToUrl = evolution.evolves_to[0].species.url
 
                 }   else {
-                    console.log('First of three EVOLUTION')
+                    //First of three EVOLUTION'
                     evolveToUrl = evolution.evolves_to[0].species.url
                 }
             } else if (pokemon.name === evolution.evolves_to[0].species.name) {
                 //first evolution
                 if(evolution.evolves_to[0].evolves_to.length === 0){
-                    //2 evolution
-                    console.log('Final EVOLUTION')
+                    //Final EVOLUTION
                     evolveFromUrl = evolution.species.url
                 }   else {
-                    console.log('Second of three EVOLUTION')
+                    //Second of three EVOLUTION
                     evolveFromUrl = evolution.species.url
                     evolveToUrl = evolution.evolves_to[0].evolves_to[0].species.url
                 }
             } 
             else if (pokemon.name === evolution.evolves_to[0].evolves_to[0].species.name){
-                // second evolution
-                console.log('Final')
+                //'Third Final Evolution'
                 evolveFromUrl = evolution.evolves_to[0].species.url
             }
             
@@ -74,7 +69,6 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
         window.location.reload()
     }
 
-    // console.log(canEvolve,evolution)
     return(
         <div className='evolution'>
             {canEvolve !== undefined ? canEvolve === true ? 
