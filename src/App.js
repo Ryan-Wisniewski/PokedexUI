@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from 'axios'
-import './App.css';
+import './App.scss';
 import Header from './components/Header';
 import Searchbar from './components/Searchbar';
 import PokemnonAll from './components/PokemonAll';

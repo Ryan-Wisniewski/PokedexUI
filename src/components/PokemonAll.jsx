@@ -9,7 +9,7 @@ const PokemnonAll = (props) => {
         const pokemonImg = DATA[index]
         return(
             <Link to={`/${pokemonImg.id}`} key={index}>
-                <div >
+                <div>
                     <img src={pokemonImg.front} alt={value.name}/>
                     <p>{value.name}</p>
                 </div>
@@ -18,9 +18,9 @@ const PokemnonAll = (props) => {
     )
 
     return(
-        <>
+        <div className='allPokemon'>
             {pokemon}
-        </>
+        </div>
     )
 }
 

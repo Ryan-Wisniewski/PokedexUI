@@ -17,13 +17,12 @@ const SearchHistory = ({ newSearch }) => {
 
     searchArr = searchArr ? searchArr.split(',') : []
     return(
-        <>
+        <div className='searchHistory'>
             {/* {console.log(Object.values(searchArr).length, searchArr)} */}
             {searchArr && searchArr.length > 0 
                 ? searchArr.map(each => <p>{each}</p>)
-                : console.log('oof')}
-            {/* {searchArr.map(each => <p>{each}</p>)} */}
-        </>
+                : null}
+        </div>
     )
 }
 

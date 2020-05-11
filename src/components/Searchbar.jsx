@@ -38,11 +38,12 @@ const Searchbar = () => {
     }
 
     return (
-        <div>
+        <div className='searchBar'>
         <form onSubmit={onsubmit}>
             <input 
                 type='text'
                 name='pokeSearch'
+                placeholder='Search by Id or Name'
                 value={newSearch.pokeSearch}
                 onChange={handleChange}
             />

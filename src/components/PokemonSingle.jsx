@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import DATA from '../pokeImg.json'
 import Moves from './SinglePokemonInfo/Moves'
@@ -11,6 +12,7 @@ const PokemonSingle = (props) => {
     const locationArr = []
     const [ speciesPokemon, setSpeciesPokemon ] = useState()
     const [ canEvolve, setCanEvolve ] = useState()
+    const [ evolutionInfo, setEvolutionInfo] = useState()
     
     const { id } = props.match.params
     useEffect(() => {
@@ -38,6 +40,9 @@ const PokemonSingle = (props) => {
                         // console.log(res.data)
                         if (res.data.chain.evolves_to.length > 0){
                             setCanEvolve(true)
+                            setEvolutionInfo(res.data.chain)
+                        } else {
+                            setCanEvolve(false)
                         }
                     })
                     .catch(err => console.log(err))
@@ -51,14 +56,15 @@ const PokemonSingle = (props) => {
     }, [])
 
     return (
-        <>
+        <div className='pokemonSingle'>
         {/* {console.log(singlePokemon, 'LOCATION\n', locationPokemon, '\nSPECIES', speciesPokemon)} */}
         {/* General */}
+        <Link className='backButton' to='/'>Back</Link>
         <div className='general'>
-            <img src={DATA[id - 1].front} alt=""/>
-            <p>{singlePokemon && singlePokemon.name}</p>
-            {singlePokemon && singlePokemon.types.map((each) => <p>{each.type.name}</p>)}
-            <p>{speciesPokemon && speciesPokemon.color.name}</p>
+            {id <= 151 && <img src={DATA[id - 1].front} alt=""/>}
+            <h2>{singlePokemon && singlePokemon.name}</h2>
+            {singlePokemon && singlePokemon.types.map((each) => <h3>Type: {each.type.name}</h3>)}
+            <h3>Color: {speciesPokemon && speciesPokemon.color.name}</h3>
         </div>
             {/* Genders */}
             {/* Genders were released in the Johto region for breeding. For some reason there 
@@ -81,17 +87,14 @@ const PokemonSingle = (props) => {
                 // return locationArr   
             })}
 
-        
-        <Location classname='location' pokemon={locationArr} />
-        <Moves classname='moves' pokemon={singlePokemon}/>
-        <Evolution classname='evolution' canEvolve={canEvolve} evolution={speciesPokemon}/>
-
+        <div className='details'>
+            <Location pokemon={locationArr} />
+            <Moves pokemon={singlePokemon}/>
+        </div>
         {/* Evolution's */}
-
-        {canEvolve && <p>CAN EVOLVE!</p>}
-        {!canEvolve && <p>CANT EVOLVE!</p>}
-
-        </>
+        
+        <Evolution pokemon={singlePokemon} canEvolve={canEvolve} evolution={evolutionInfo}/>
+        </div>
     )
 }
 
