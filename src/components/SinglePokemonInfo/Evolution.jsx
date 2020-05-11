@@ -7,7 +7,6 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
     let history = useHistory()
     let [ evolvesTo, setEvolvesTo ] = useState()
     let [ evolvesFrom, setEvolvesFrom] = useState()
-    let [ reload, setReload ] = useState(false)
     let evolveToUrl = ''
     let evolveFromUrl = ''
 
