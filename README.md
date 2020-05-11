@@ -10,4 +10,4 @@
 
 #Sometimes when searching the component rerenders with white space on right side
 
-#Would like to put searchHistory in order 
+#Would like to put searchHistory in order
