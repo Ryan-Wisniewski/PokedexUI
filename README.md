@@ -11,3 +11,7 @@
 #Sometimes when searching the component rerenders with white space on right side
 
 #Would like to put searchHistory in order
+
+#Bug in the cache memory somewhere..Find and fix to remove the 35 from being loaded into the sessionstorage
+
+#Scrub the - out of pokemon
