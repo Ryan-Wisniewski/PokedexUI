@@ -2,7 +2,7 @@
 # import json
 
 # f= open("pokeImg.json","w+")
-# for num in range(1,152):
+# for num in range(1,807):
 #     URL = f'https://pokeapi.co/api/v2/pokemon/{num}'
 #     print(num)
 #     # sending get request and saving the response as response object 

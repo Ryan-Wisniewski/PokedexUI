@@ -7,7 +7,7 @@ const Locations = ({ pokemon }) => {
         <div className='locations'>
             <h2>Locations:</h2>
             <div className='location' >
-            {pokemon && pokemon.length > 0 ?  pokemon.map((each) => <p>{each}</p>) : <p>NO KNOWN LOCATION IN KANTO </p>}
+            {pokemon && pokemon.length > 0 ?  pokemon.map((each) => <p>{each}</p>) : <p>NO KNOWN LOCATION</p>}
             </div>
         </div>
     )

@@ -5,6 +5,8 @@ import DATA from '../pokeImg.json'
 import Moves from './SinglePokemonInfo/Moves'
 import Location from './SinglePokemonInfo/Locations'
 import Evolution from './SinglePokemonInfo/Evolution'
+import Varieties from './SinglePokemonInfo/Varieties'
+import Gender from './SinglePokemonInfo/Gender'
 
 const PokemonSingle = (props) => {
     const [ singlePokemon, setSinglePokemon ] = useState()
@@ -47,50 +49,43 @@ const PokemonSingle = (props) => {
                     .catch(err => console.log(err))
             })
             .catch(err => {console.log(err)})
-        // ## gives evolution chain
-            //https://pokeapi.co/api/v2/evolution-chain/{id}/ <-- for evolution
-
         
         // https://pokeapi.co/api/v2/gender/{id or name}/ <-- for gender
     }, [])
 
     return (
         <div className='pokemonSingle'>
+            {/* {console.log(singlePokemon, speciesPokemon, locationPokemon)} */}
         {/* General */}
         <Link className='backButton' to='/'>Back</Link>
         <div className='general'>
-            {id <= 151 && <img src={DATA[id - 1].front} alt=""/>}
+            {id <= 807 ? <img src={DATA[id - 1].front} alt=""/> : null}
             <h2>{singlePokemon && singlePokemon.name}</h2>
             {singlePokemon && singlePokemon.types.map((each) => <h3>Type: {each.type.name}</h3>)}
             <h3>Color: {speciesPokemon && speciesPokemon.color.name}</h3>
         </div>
-            {/* Genders */}
-            {/* Genders were released in the Johto region for breeding. For some reason there 
-            arent genders they all have both genders except the two nidoran evo chains. */}
-        {/* {speciesPokemon && speciesPokemon.has_gender_differences == false && <p>Male and Female</p>} */}
-
-            {/* Varieties */}
-            {/* all varieties are default for kanto pokemon */}
-        {/* {speciesPokemon && speciesPokemon.map((each => {console.log(each)}))} */}
 
         {/* Get Locations */}
 
         {locationPokemon && locationPokemon.map((each) => {
-            each.version_details.map(each2 => {
-                if (each2.version.name === 'red'){
-                    locationArr.push(each.location_area.name)
-                    }
-                    // return locationArr //was yellow erroring about no return but adding cause side-effect
-                })
+            // each.version_details.map(each2 => {
+                // if (each2.version.name === 'red'){
+                // }
+                locationArr.push(each.location_area.name)
+                    // return locationArr 
+                // })
                 // return locationArr   
-            })}
+        })}
 
         <div className='details'>
             <Location pokemon={locationArr} />
             <Moves pokemon={singlePokemon}/>
         </div>
-        {/* Evolution's */}
-        
+
+        <div className='details2'>
+            <Gender pokemon={singlePokemon}/>
+            <Varieties pokemon={speciesPokemon}/>
+        </div>
         <Evolution pokemon={singlePokemon} canEvolve={canEvolve} evolution={evolutionInfo}/>
         </div>
     )
