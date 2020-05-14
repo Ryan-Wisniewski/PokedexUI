@@ -27,7 +27,8 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
                     evolveToUrl = []
                         evolution.evolves_to.map(each => {axios.get(each.species.url)
                             .then(res => {
-                                renderMultiple(res.data.id)
+                                console.log(res)
+                                renderMultiple({id: res.data.id, name: res.data.name})
                             })
                             .catch(err => console.log(err))
                         })
@@ -133,10 +134,6 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
         }}
     }
 
-    // const forceUpdateFrom = () => {
-    //     history.push(`/${evolvesFrom}`)
-    //     window.location.reload()
-    // }
 
     const forceUpdate = (e) => {
         console.log(e)
@@ -151,8 +148,9 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
                 <div className='buttons'>
                     {evolvesFrom && <Link className='button' to={null} onClick={() => forceUpdate(evolvesFrom)}>Previous Evolution</Link>}
                     {evolvesTo && <Link className='button' to={null} onClick={() => forceUpdate(evolvesTo)}>Next Evolution</Link>}
-                    {evolveToUrl && console.log(evolveToUrl)}
-                    {!evolvesMultiple ? null : evolvesMultiple.map(each => <Link className='button' onClick={() => forceUpdate(each)}>Next Evolution: {each}</Link>)}
+                    <div className='multipleButton'>
+                    {!evolvesMultiple ? null : evolvesMultiple.map(each => <Link className='button' onClick={() => forceUpdate(each.id)}>Next Evolution: {each.name}</Link>)}
+                    </div>
                 </div>
                 : <p className='noEvolution'>No evolution chain</p> 
                 : null}
