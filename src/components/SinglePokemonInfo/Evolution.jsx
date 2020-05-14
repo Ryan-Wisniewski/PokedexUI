@@ -1,5 +1,5 @@
 // contains evolution
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { render } from '@testing-library/react'
@@ -9,12 +9,13 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
     let history = useHistory()
     let [ evolvesTo, setEvolvesTo ] = useState()
     let [ evolvesFrom, setEvolvesFrom] = useState()
-    let [ evolvesMultiple, setEvolvesMultiple] = useState()
+    let [ evolvesMultiple, setEvolvesMultiple] = useState([])
     // let evolvesArr = []
     let evolveToUrl = ''
     let evolveFromUrl = ''
 
     //plan CHECK for name in first, if name does not match move to the next evolves_to
+    const evolutionCheck = () => {
     if (canEvolve === true) {
         if (evolution &&  pokemon){
             //For Evolution
@@ -22,13 +23,15 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
                 //base pokemon
                 if (evolution.evolves_to.length > 1) {
                     //Evolution from first has 2 different forms (probably gendered) maybe others like eevee
+                    // console.log(evolution)
                     evolveToUrl = []
-                    evolution.evolves_to.map(each => {axios.get(each.species.url)
-                        .then(res => evolveToUrl.push(res.data.id))
-                        // .then(res => evolveToUrl.push(res.data.id))
-                        .catch(err => console.log(err))
-                    })
-                    console.log(evolveToUrl)
+                        evolution.evolves_to.map(each => {axios.get(each.species.url)
+                            .then(res => {
+                                renderMultiple(res.data.id)
+                            })
+                            .catch(err => console.log(err))
+                        })
+                    // console.log(evolveToUrl)
                 } else if(evolution.evolves_to[0].evolves_to.length === 0){
                     //First of two EVOLUTION
                     evolveToUrl = evolution.evolves_to[0].species.url
@@ -62,7 +65,7 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
             if(toURL !== ''){
                 if(evolution.evolves_to.length > 1 && pokemon.name === evolution.species.name){
                     
-                    console.log(toURL)
+                    // console.log(toURL)
                     // evolvesMultiple = []
                     // axios.all(toURL).then(axios.spread((...res) => {
                     //     for (let x = 0; x < res.length; x++){
@@ -92,23 +95,52 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
 
         }
     }
-    // const renderMultiple = () =>{
-    //     setTimeout(() => {
-    //         if(evolvesTo){
-    //             console.log(evolvesTo)
-    //             evolvesTo.map(each => evolvesArr.push(each))
-    //         }
-    //     }, 1000);
-    // }
-    // renderMultiple()
+}
 
-    const forceUpdateFrom = () => {
-        history.push(`/${evolvesFrom}`)
-        window.location.reload()
+    const renderMultiple = (id) =>{
+        return new Promise((resolve, reject) => {
+                if(id){
+                    resolve()
+                } else {
+                    reject()
+                }
+        })
+        .then(() => {
+            evolveToUrl.push(id)
+            if (evolveToUrl.length == evolution.evolves_to.length){
+                console.log('almost there!', evolveToUrl)
+                // evolvesMultiple = evolveToUrl
+                console.log(evolveToUrl)
+                return forceUpdateMultiple(evolveToUrl)
+            }
+        })
+        .catch((err) => console.log(err));
+        
     }
 
-    const forceUpdateTo = () => {
-        history.push(`/${evolvesTo}`)
+    useEffect(() => {
+        evolutionCheck()
+    })
+
+    const forceUpdateMultiple = async (e) => {
+        console.log(e)
+        if(evolution){
+            console.log(evolvesMultiple.length)
+        if (evolvesMultiple.length == evolution.evolves_to.length){
+            console.log('pass')
+        } else {
+            setEvolvesMultiple(e)
+        }}
+    }
+
+    // const forceUpdateFrom = () => {
+    //     history.push(`/${evolvesFrom}`)
+    //     window.location.reload()
+    // }
+
+    const forceUpdate = (e) => {
+        console.log(e)
+        history.push(`/${e}`)
         window.location.reload()
     }
 
@@ -117,11 +149,11 @@ const Evolution = ({ canEvolve, evolution, pokemon }) => {
             {/* {console.log(evolvesTo)} */}
             {canEvolve !== undefined ? canEvolve === true ? 
                 <div className='buttons'>
-                    {evolvesFrom && <Link className='button' to={null} onClick={forceUpdateFrom}>Previous Evolution</Link>}
-                    {evolvesTo && <Link className='button' to={null} onClick={forceUpdateTo}>Next Evolution</Link>}
-                    {/* {console.log(evolvesTo)} */}
-                    {/* {console.log(evolveToUrl)} */}
-                </div> 
+                    {evolvesFrom && <Link className='button' to={null} onClick={() => forceUpdate(evolvesFrom)}>Previous Evolution</Link>}
+                    {evolvesTo && <Link className='button' to={null} onClick={() => forceUpdate(evolvesTo)}>Next Evolution</Link>}
+                    {evolveToUrl && console.log(evolveToUrl)}
+                    {!evolvesMultiple ? null : evolvesMultiple.map(each => <Link className='button' onClick={() => forceUpdate(each)}>Next Evolution: {each}</Link>)}
+                </div>
                 : <p className='noEvolution'>No evolution chain</p> 
                 : null}
         </div>
