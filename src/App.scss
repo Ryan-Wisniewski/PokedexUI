@@ -234,6 +234,19 @@ img{
       border: 1px solid black;
       background-color: red;
     }
+
+    .multipleButton{
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      
+      .button{
+      font-size: 1.3rem;
+      padding: .5rem 1rem;
+      margin: .3rem;
+      border: 1px solid black;
+      background-color: red;
+      }
+    }
   }
 
   .noEvolution{
