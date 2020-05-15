@@ -1,17 +1,29 @@
-#convert search by number to the name after searching by number
+## convert SearchHistory by number to the name after searching by number
 
-#Just cache it.. (very slow) #Redo with redux. (for speed)
+## Would like to put searchHistory in order by id
 
-#change "no known location" on a few that are found
+## Just cache it.. (very slow) #Redo with redux. (for speed)
 
-#Take elements for Type and Color and extract the title into so it doesnt repeat
+## change "no known location" on a few that are found
 
-#Create error handling to reroute pokemon out of range
+## Take elements for Type and Color and extract the title into so it doesnt repeat
 
-#Sometimes when searching the component rerenders with white space on right side
+## Scrub the - out of pokemon
 
-#Would like to put searchHistory in order
+## typing a number out of range or pokemon is nul  will lead to a null page
 
-#Bug in the cache memory somewhere..Find and fix to remove the 35 from being loaded into the sessionstorage
+## was noticing a bug when very occasionally filter.map is undefined in gender
 
-#Scrub the - out of pokemon
+## Shorten the Locations list for the few that have a bunch of location
+
+## add a 2 components for "more moves" and "more locations" to see all available
+
+## alola region pokemon dont have data for the /species/ endpoint
+
+# The Runtime is very slow - 
+## TODO: 
+## Extend the getImgURL.py to include all the data I need for all 807 pokemon
+## Instead of using a URL for the image grab the BLOB to cache directly to the App
+## Remove the large chain of api calls. Instead grab everything from the data obj pokeImg.json
+### Would save network bandwidth as well as increase performance for the over all App
+### TTL/TTR create a store with useContext, and explore useHistory further. (specifically history.goBack() looks interesting)

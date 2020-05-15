@@ -22,6 +22,7 @@ const Gender = ({ pokemon }) => {
 
     return(
     <div className='gender'>
+        <h2>Gender:</h2>
         {isMale && pokemon && isMale.filter(checkGender).length > 0 && <p>Male</p>}
         {isFemale && pokemon && isFemale.filter(checkGender).length > 0 && <p>Female</p>}
         {isFemale && pokemon && isMale.filter(checkGender).length === 0 && isFemale.filter(checkGender).length === 0 && <p>Genderless</p>}

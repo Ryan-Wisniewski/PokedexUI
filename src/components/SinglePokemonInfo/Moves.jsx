@@ -21,12 +21,12 @@ const Moves = ({ pokemon }) => {
         <div className='moves'>
             <div className='abilityList'>
                 <h2>Abilites:</h2>
-                {pokemon && pokemon.abilities.map((each) => <p>{each.ability.name}</p>)}
+                {pokemon && pokemon.abilities.map((each) => <p key={each.ability.name}>{each.ability.name}</p>)}
             </div>
             {/* create link to page with all moves */}
             <div className='moveList'>
                 <h2>Moves:</h2>
-                {moveList.length === 4 && moveList.map((each) => <p>{each}</p>)}
+                {moveList.length === 4 && moveList.map((each) => <p key={each}>{each}</p>)}
             </div>
         </div>
     )

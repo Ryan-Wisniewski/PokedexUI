@@ -18,7 +18,7 @@ const Searchbar = () => {
 
     const onsubmit = (e) => {
         e.preventDefault()
-        const data = newSearch.pokeSearch
+        const data = newSearch.pokeSearch.toLocaleLowerCase()
         //check if num was typed > 151 && 
         //FUTURE: create dict from their names and check names against the dict.
         //Then dont need this duplicate ajax req

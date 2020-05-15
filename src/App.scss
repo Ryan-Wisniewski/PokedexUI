@@ -95,6 +95,7 @@ img{
 }
 
 .allPokemon{
+  min-height: 100vh;
   padding-bottom: 3rem;
   display: grid;
   grid-template-columns: repeat(9, auto); 
@@ -139,7 +140,7 @@ img{
 }
 
 .general{
-  margin: 1rem 0;
+  margin: 1rem 0 2rem 0;
   padding: 0 0 1.5rem 0;
   width: 12rem;
   background-color: #ffffff;
@@ -150,30 +151,32 @@ img{
   }
 }
 
+.locations{
+  background-color: #ffffff;
+  border: 1px solid black;
+  margin: 0 0 2rem 0;
+  padding: 1rem 1rem;
+  width: 80%;
+
+  .location{
+    display: grid;
+    grid-template-columns: repeat(4, auto); 
+    padding: 1rem 1rem;
+    font-size: 1.2rem;
+    
+    
+    p{
+      margin: .5rem .5rem;
+    }
+  } 
+}
 .details{
   margin: 0 0 1rem 0;
   width: 70%;
-  
-  .locations{
-    background-color: #ffffff;
-    border: 1px solid black;
-
-    .location{
-      display: grid;
-      grid-template-columns: repeat(5, auto); 
-      padding: 1rem 1rem;
-      font-size: 1.2rem;
-      
-      p{
-        margin: 0 .5rem;
-      }
-    } 
-  }
-  
 
   .moves{
     font-size: 1.2rem;
-    margin: 2.5rem 0;
+    margin: 0 0 2rem 0;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
@@ -197,7 +200,7 @@ img{
 
 .details2{
   font-size: 1.2rem;
-  margin: 2.5rem 0;
+  margin: 0 0 2rem 0;
   width: 70%;
   display: flex;
   flex-flow: row nowrap;
