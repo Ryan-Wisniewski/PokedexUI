@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import DATA from '../pokeImg.json'
 
 
-const PokemnonAll = (props) => {
+const PokemnonAll = () => {
     let [ allPokemon, setAllPokemon] = useState()
     const [ loadNext, setLoadNext ] = useState(false)
     let [ offset, setOffset ] = useState(50)
@@ -17,9 +17,6 @@ const PokemnonAll = (props) => {
             .catch(err => {console.log(err)})
     }
 
-
-    // let pokemon = 
-  
     window.onscroll = function(e) {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
             // you're at the bottom of the page
@@ -40,7 +37,6 @@ const PokemnonAll = (props) => {
                     }
                 }
             }
-            console.log('NEWNEWNEW', allPokemon)
         })
         .catch(err => {console.log(err)})
         setLoadNext(false)
@@ -59,7 +55,6 @@ const PokemnonAll = (props) => {
                     </Link>
                 )}
             )}
-            {console.log('NEWNEWNEW', loadNext)}
         </div>
     )
 }

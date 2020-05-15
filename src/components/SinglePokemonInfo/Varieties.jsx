@@ -10,7 +10,8 @@ const Varieties = ({ pokemon }) => {
 
     return(
     <div className='varieties'>
-        {pokemon && pokemon.varieties.filter(hasVariety).length > 0 ? pokemon.varieties.filter(hasVariety).map(each => <p>{each.pokemon.name}</p>) : <p>Default Variety</p>}
+        <h2>Varieties:</h2>
+        {pokemon && pokemon.varieties.filter(hasVariety).length > 0 ? pokemon.varieties.filter(hasVariety).map(each => <p key={each.pokemon.name}>{each.pokemon.name}</p>) : <p>Default Variety</p>}
     </div>
     )
 }

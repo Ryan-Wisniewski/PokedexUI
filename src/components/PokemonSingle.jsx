@@ -11,7 +11,6 @@ import Gender from './SinglePokemonInfo/Gender'
 const PokemonSingle = (props) => {
     const [ singlePokemon, setSinglePokemon ] = useState()
     const [ locationPokemon, setLocationPokemon ] = useState()
-    const locationArr = []
     const [ speciesPokemon, setSpeciesPokemon ] = useState()
     const [ canEvolve, setCanEvolve ] = useState()
     const [ evolutionInfo, setEvolutionInfo] = useState()
@@ -46,47 +45,34 @@ const PokemonSingle = (props) => {
                             setCanEvolve(false)
                         }
                     })
-                    .catch(err => console.log(err))
             })
             .catch(err => {console.log(err)})
-        
-        // https://pokeapi.co/api/v2/gender/{id or name}/ <-- for gender
     }, [])
 
     return (
         <div className='pokemonSingle'>
-            {/* {console.log(singlePokemon, speciesPokemon, locationPokemon)} */}
-        {/* General */}
-        <Link className='backButton' to='/'>Back</Link>
-        <div className='general'>
-            {id <= 807 ? <img src={DATA[id - 1].front} alt=""/> : null}
-            <h2>{singlePokemon && singlePokemon.name}</h2>
-            {singlePokemon && singlePokemon.types.map((each) => <h3>Type: {each.type.name}</h3>)}
-            <h3>Color: {speciesPokemon && speciesPokemon.color.name}</h3>
-        </div>
+            {/* General */}
 
-        {/* Get Locations */}
+            <Link className='backButton' to='/'>Back</Link>
+            <div className='general'>
+                {id <= 807 ? <img src={DATA[id - 1].front} alt=""/> : null}
+                <h2>{singlePokemon && singlePokemon.name}</h2>
+                {singlePokemon && singlePokemon.types.map((each) => <h3 key={each.type.name}>Type: {each.type.name}</h3>)}
+                <h3>Color: {speciesPokemon && speciesPokemon.color.name}</h3>
+            </div>
 
-        {locationPokemon && locationPokemon.map((each) => {
-            // each.version_details.map(each2 => {
-                // if (each2.version.name === 'red'){
-                // }
-                locationArr.push(each.location_area.name)
-                    // return locationArr 
-                // })
-                // return locationArr   
-        })}
+            {/* Get Locations */}
 
-        <div className='details'>
-            <Location pokemon={locationArr} />
-            <Moves pokemon={singlePokemon}/>
-        </div>
+            <Location pokemon={locationPokemon} />
+            <div className='details'>
+                <Moves pokemon={singlePokemon}/>
+            </div>
 
-        <div className='details2'>
-            <Gender pokemon={singlePokemon}/>
-            <Varieties pokemon={speciesPokemon}/>
-        </div>
-        <Evolution pokemon={singlePokemon} canEvolve={canEvolve} evolution={evolutionInfo}/>
+            <div className='details2'>
+                <Gender pokemon={singlePokemon}/>
+                <Varieties pokemon={speciesPokemon}/>
+            </div>
+            <Evolution pokemon={singlePokemon} canEvolve={canEvolve} evolution={evolutionInfo}/>
         </div>
     )
 }
