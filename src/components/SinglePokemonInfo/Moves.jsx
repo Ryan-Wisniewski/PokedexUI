@@ -4,9 +4,9 @@ import React from 'react'
 const Moves = ({ pokemon }) => {
     let moveList = []
 
-    while(pokemon){
-        let r = Math.floor(Math.random() * pokemon.moves.length)
-        
+    if(pokemon && pokemon.moves.length > 4){
+        while(pokemon){
+            let r = Math.floor(Math.random() * pokemon.moves.length)
             if(moveList.length === 4){
                 break
             } else if (moveList.includes(pokemon.moves[r].move.name)){
@@ -15,6 +15,11 @@ const Moves = ({ pokemon }) => {
             } else {
                 moveList.push(pokemon.moves[r].move.name)
             }
+        }
+    } else if (pokemon && pokemon.moves.length <= 4){
+        for (let x = 0; x < pokemon.moves.length; x++){
+            moveList.push(pokemon.moves[x].move.name)
+        }
     }
     
     return(
@@ -26,7 +31,7 @@ const Moves = ({ pokemon }) => {
             {/* create link to page with all moves */}
             <div className='moveList'>
                 <h2>Moves:</h2>
-                {moveList.length === 4 && moveList.map((each) => <p key={each}>{each}</p>)}
+                {moveList.length && moveList.map((each) => <p key={each}>{each}</p>)}
             </div>
         </div>
     )
